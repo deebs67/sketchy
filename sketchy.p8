@@ -1,8 +1,8 @@
 pico-8 cartridge // http://www.pico-8.com
 version 18
 __lua__
-pen_x = 64  -- Starting around the middle of the canvas
-pen_y = 64  -- Starting around the middle of the canvas
+pen_x = 64  -- Starting around the middle (centre) of the canvas
+pen_y = 64  -- Starting around the middle (centre) of the canvas
 pen_width = 1
 pen_down = true
 pendown_colour = 7  -- Normally 7 (White)
