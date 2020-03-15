@@ -3,9 +3,10 @@ version 18
 __lua__
 pen_x = 50
 cursor_y = 80
-pen_width = 1_down = true
-pendown_colour = 6  -- Normally 6
-penup_colour = 0  -- Normally 0
+pen_width = 10
+pen_down = true
+pendown_colour = 7  -- Normally 7 (White)
+penup_colour = 0  -- Normally 0 (Black)
 
 function _init()
    -- Nothing to go here yet...
