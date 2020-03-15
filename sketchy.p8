@@ -13,10 +13,22 @@ function _init()
 end
 
 function _update()
+   -------------------------------------------------------
+   -- Should I move the cursor?
+   -------------------------------------------------------
+   if (btnp(0)) pixelpos_x -= 1   -- Left?
+   if (btnp(1)) pixelpos_x += 1   -- Right?
+   if (btnp(2)) pixelpos_y -= 1   -- Up?
+   if (btnp(3)) pixelpos_y += 1   -- Down?
+   
+   -------------------------------------------------------
+   -- Toggle cursor on/off?
+   -------------------------------------------------------
    if (btnp(4)) do
       pixelon = not pixelon
       
    end
+   
 end
 
 function _draw()
