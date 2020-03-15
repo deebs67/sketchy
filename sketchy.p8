@@ -9,7 +9,7 @@ colour_pixelon = 6  -- Normally 6
 colour_pixeloff = 0  -- Normally 0
 
 function _init()
-   -- Nothing to ge here yet...
+   -- Nothing to go here yet...
 end
 
 function _update()
