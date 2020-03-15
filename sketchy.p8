@@ -1,17 +1,31 @@
 pico-8 cartridge // http://www.pico-8.com
 version 18
 __lua__
+-- Pen parameters
 pen_x = 64  -- Starting around the middle (centre) of the canvas
 pen_y = 64  -- Starting around the middle (centre) of the canvas
 pen_width = 1
 pen_down = true
-pendown_colour = 7  -- Normally 7 (White)
-penup_colour = 5  -- Normally 5 (Dark grey)
+pendown_colour = 9  -- To indicate pen position and state
+penup_colour = 5  -- To indicate pen position and state
+pen_colour = 7   -- The colour that the pen writes
 print_colour = 7 -- Normally 7 (White)
 
+-- Define the 'canvas map' (i.e. a Lua table) to store "pixel" values (copied from 'game_of_life.p8')
+canvas_map = {}
+
 function _init()
-   -- Nothing to go here yet...
-end
+   -------------------------------------------------------
+   -- Initialise the drawing canvas
+   -------------------------------------------------------
+   for ii=0, 127 do
+      canvas_map[ii] = {}
+      for jj=0, 127 do
+         canvas_map[ii][jj] = 0
+      end
+   end  -- for
+   
+end  -- function
 
 function _update()
    -------------------------------------------------------
@@ -25,41 +39,51 @@ function _update()
    -------------------------------------------------------
    -- Toggle pen up/down?
    -------------------------------------------------------
-   if (btnp(4)) do
-      pen_down = not pen_down
-      
-   end
+   if (btnp(4)) pen_down = not pen_down
+   
+   -------------------------------------------------------
+   -- Drawing different things depending
+   -- upon pen state
+   -------------------------------------------------------   
+   if (pen_down) canvas_map[pen_x][pen_y] = pen_colour
    
 end
 
 function _draw()
    cls(0)
-    
+   
    -------------------------------------------------------
-   -- Drawing/writing different things depending
-   -- upon pen state
-   -------------------------------------------------------   
-   if (pen_down) then
-      color(print_colour)
-      print("pen down",90,0)
-      color(pendown_colour)
-      rectfill(pen_x,pen_y,pen_x+(pen_width-1),pen_y+(pen_width-1))
-
-   else
-      color(penup_colour)
-      rectfill(pen_x,pen_y,pen_x+(pen_width-1),pen_y+(pen_width-1))
-      color(print_colour)
-      print("pen up",90,0)   -- Why does this print statement only work the first time around??
-
+   -- Paint out the canvas_map onto the screen
+   -------------------------------------------------------
+   for x,row_x in pairs(canvas_map) do           -- row_x = map rows
+      for y,colour_value in pairs(row_x) do            -- colour_value = cell values
+         rectfill(x, y, x, y, colour_value)
+      end
    end
 
    -------------------------------------------------------
-   -- Printing which is independent of pen state
+   -- Indicate the pen position, and its state
+   -------------------------------------------------------
+   if (pen_down) do
+      rectfill(pen_x, pen_y, pen_x, pen_y, pendown_colour)
+      color(print_colour)
+      print("pen down", 90, 0)
+      
+   else   -- Pen must be up
+      rectfill(pen_x, pen_y, pen_x, pen_y, penup_colour)
+      color(print_colour)
+      print("pen up", 90, 0)
+      
+   end
+   
+   -------------------------------------------------------
+   -- Printing info which is independent
+   -- of pen state
    ------------------------------------------------------- 
-   color(print_colour)
+   color(print_colour)  -- Belt and braces
    print("pen_x="..pen_x,0,0)
    print("pen_y="..pen_y,0,8)
-   
+
 end
 
 
