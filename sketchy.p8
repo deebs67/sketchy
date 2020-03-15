@@ -1,6 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 18
 __lua__
+
 -- Pen parameters
 pen_x = 64  -- Starting around the middle (centre) of the canvas
 pen_y = 64  -- Starting around the middle (centre) of the canvas
@@ -14,6 +15,7 @@ print_colour = 7 -- Normally 7 (White)
 -- Define the 'canvas map' (i.e. a Lua table) to store "pixel" values (copied from 'game_of_life.p8')
 canvas_map = {}
 
+
 function _init()
    -------------------------------------------------------
    -- Initialise the drawing canvas
@@ -26,6 +28,7 @@ function _init()
    end  -- for
    
 end  -- function
+
 
 function _update()
    -------------------------------------------------------
@@ -47,7 +50,8 @@ function _update()
    -------------------------------------------------------   
    if (pen_down) canvas_map[pen_x][pen_y] = pen_colour
    
-end
+end -- function _update()
+
 
 function _draw()
    cls(0)
